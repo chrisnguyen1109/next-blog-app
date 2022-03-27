@@ -1,8 +1,27 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import Layout from 'components/Layout';
+import { AppPropsWithLayout } from 'interfaces';
+import Head from 'next/head';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import '../styles/globals.css';
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
-}
+const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
+    const AppLayout = Component.Layout ?? Layout;
 
-export default MyApp
+    return (
+        <AppLayout>
+            <Head>
+                <title>Blogs Page</title>
+                <meta name="description" content="NextJS Blogs Page" />
+                <meta
+                    name="viewport"
+                    content="initial-scale=1.0, width=device-width"
+                />
+            </Head>
+            <Component {...pageProps} />
+            <ToastContainer />
+        </AppLayout>
+    );
+};
+
+export default MyApp;
